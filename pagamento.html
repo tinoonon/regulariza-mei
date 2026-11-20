@@ -314,7 +314,6 @@
       tentativasPoll++;
       if (tentativasPoll > MAX_POLLS) {
         clearInterval(pollingTimer);
-        document.getElementById('polling-status').style.display = 'none';
         return;
       }
 
