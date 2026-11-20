@@ -1,0 +1,144 @@
+═══════════════════════════════════════════════════════════════
+  SITE DE REGULARIZAÇÃO MEI - INSTRUÇÕES DE USO
+═══════════════════════════════════════════════════════════════
+
+🎯 COMO TESTAR O SITE (MODO DEMONSTRAÇÃO)
+
+1. ABRIR O SITE
+   - Abra o arquivo "index.html" no seu navegador
+   - Funciona em Chrome, Firefox, Edge, Safari
+
+2. CNPJ PARA TESTE
+   Use qualquer um destes CNPJs válidos para teste:
+   
+   ✓ 11.222.333/0001-81
+   ✓ 07.526.557/0001-00
+   ✓ 34.028.316/0001-03
+   ✓ 11.222.333/0001-81
+   
+   Obs: A máscara é automática, você pode digitar só números
+
+3. FLUXO COMPLETO
+
+   PASSO 1 - Consulta (index.html)
+   ┌─────────────────────────────────┐
+   │ 1. Digite o CNPJ                │
+   │ 2. Marque "Não sou robô"        │
+   │ 3. Clique em "CONSULTAR CNPJ"   │
+   │ 4. Aguarde 2 segundos (loading) │
+   └─────────────────────────────────┘
+   
+   PASSO 2 - Dados (dados.html)
+   ┌─────────────────────────────────┐
+   │ 1. Veja os dados do CNPJ        │
+   │ 2. Confira o procedimento       │
+   │ 3. Clique em "PAGAR AGORA"      │
+   └─────────────────────────────────┘
+   
+   PASSO 3 - Pagamento (pagamento.html)
+   ┌─────────────────────────────────┐
+   │ 1. Veja o QR Code PIX           │
+   │ 2. Teste o botão "COPIAR"       │
+   │ 3. Clique em "Simular Pgto"     │
+   └─────────────────────────────────┘
+   
+   PASSO 4 - Confirmação (confirmacao.html)
+   ┌─────────────────────────────────┐
+   │ 1. Veja o protocolo gerado      │
+   │ 2. Confira os detalhes          │
+   │ 3. Teste "Baixar comprovante"   │
+   └─────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+📱 TESTAR RESPONSIVIDADE
+═══════════════════════════════════════════════════════════════
+
+No Chrome/Edge:
+1. Pressione F12
+2. Clique no ícone de celular (Ctrl+Shift+M)
+3. Selecione diferentes dispositivos:
+   - iPhone 12 Pro
+   - iPad
+   - Galaxy S20
+   - Responsive
+
+═══════════════════════════════════════════════════════════════
+🔧 FUNCIONALIDADES IMPLEMENTADAS
+═══════════════════════════════════════════════════════════════
+
+✅ Máscara automática de CNPJ
+✅ Validação de CNPJ (dígitos verificadores)
+✅ reCAPTCHA integrado
+✅ Loading animado
+✅ QR Code gerado automaticamente
+✅ Botão copiar código PIX
+✅ Protocolo único gerado
+✅ Data de vencimento calculada (+2 dias)
+✅ Responsivo (mobile, tablet, desktop)
+✅ Navegação entre páginas
+✅ LocalStorage para salvar dados
+
+═══════════════════════════════════════════════════════════════
+⚠️ OBSERVAÇÕES IMPORTANTES
+═══════════════════════════════════════════════════════════════
+
+• MODO DEMO: Os dados são fictícios e salvos no navegador
+• CNPJ: Aceita qualquer CNPJ válido (com dígitos corretos)
+• PIX: O código PIX é fictício para demonstração
+• PAGAMENTO: Não processa pagamentos reais
+• BACKEND: Precisa de API para funcionar em produção
+
+═══════════════════════════════════════════════════════════════
+🎨 PERSONALIZAÇÃO
+═══════════════════════════════════════════════════════════════
+
+Para personalizar, edite:
+
+1. CORES (style.css - linha 7-14):
+   --azul-escuro: #2c3e50
+   --azul-claro: #3498db
+   --laranja: #f39c12
+   --verde: #27ae60
+
+2. CONTATOS (footer em cada HTML):
+   contato@exemplo.com.br → SEU_EMAIL
+   (11) 99999-9999 → SEU_TELEFONE
+
+3. VALOR (pagamento.html - linha 29):
+   R$ 79,90 → SEU_VALOR
+
+═══════════════════════════════════════════════════════════════
+🚀 PRÓXIMOS PASSOS PARA PRODUÇÃO
+═══════════════════════════════════════════════════════════════
+
+1. BACKEND
+   [ ] Criar API REST (Node.js, Python, PHP)
+   [ ] Integrar com ReceitaWS ou BrasilAPI
+   [ ] Integrar gateway de pagamento (Mercado Pago, etc)
+   [ ] Banco de dados (PostgreSQL, MySQL)
+
+2. SEGURANÇA
+   [ ] Configurar reCAPTCHA com sua chave
+   [ ] Implementar rate limiting
+   [ ] Adicionar HTTPS
+   [ ] Validação server-side
+
+3. HOSPEDAGEM
+   [ ] Registrar domínio
+   [ ] Contratar servidor/hosting
+   [ ] Configurar SSL
+   [ ] Deploy do site
+
+═══════════════════════════════════════════════════════════════
+📞 SUPORTE
+═══════════════════════════════════════════════════════════════
+
+Para dúvidas sobre o código ou personalização:
+1. Leia o arquivo README.md
+2. Verifique o código com comentários
+3. Teste cada funcionalidade individualmente
+
+═══════════════════════════════════════════════════════════════
+
+Desenvolvido com base nas especificações do prompt
+Versão: 1.0 | Data: 2026

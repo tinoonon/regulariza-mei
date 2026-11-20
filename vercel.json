@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static",
+      "config": {
+        "excludeFiles": "api/**"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/pix/criar",
+      "dest": "/api/pix/criar.js"
+    },
+    {
+      "src": "/api/pix/status",
+      "dest": "/api/pix/status.js"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "PROFANUS_API_KEY": "@profanus_api_key"
+  }
+}

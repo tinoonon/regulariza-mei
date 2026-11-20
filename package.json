@@ -1,0 +1,17 @@
+{
+  "name": "regulariza-mei",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal de Regularização MEI com integração Profanus Pay",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
+  }
+}

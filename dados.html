@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dados do MEI — Regularização</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container--wide header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://i.ibb.co/CsYPdqkf/imagemsite.png" alt="RegularizaMEI" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-name">Regulariza<strong>MEI</strong></span>
+          <span class="logo-sub">Portal do Empreendedor</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <span class="header-badge">
+          <span class="dot"></span>
+          Ambiente seguro
+        </span>
+        <a href="#" class="header-help">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Precisa de ajuda?
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- INTRO -->
+      <div class="page-intro">
+        <span class="page-label">Regularização MEI · 2026</span>
+        <h1>CNPJ encontrado</h1>
+        <p>Revise os dados abaixo e prossiga com a regularização.</p>
+      </div>
+
+      <!-- STEPS -->
+      <div class="steps-indicator">
+        <div class="step-item done">
+          <div class="step-num">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <span class="step-label">Consulta</span>
+        </div>
+        <div class="step-item active">
+          <div class="step-num">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <span class="step-label">Dados</span>
+        </div>
+        <div class="step-item">
+          <div class="step-num">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </div>
+          <span class="step-label">Pagamento</span>
+        </div>
+      </div>
+
+      <div class="steps-meta">
+        <span>Etapa 2 de 3</span>
+        <a href="index.html">Voltar</a>
+      </div>
+
+      <!-- ALERTA DE REGULARIZAÇÃO -->
+      <div class="alert alert--warning">
+        <div class="alert-title">Regularização necessária</div>
+        Para validar seu cadastro e liberar o acesso ao sistema DAS, é necessário realizar o pagamento da taxa de integração no prazo indicado abaixo.
+      </div>
+
+      <!-- DADOS DO REGISTRO -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="card-title">Dados do registro</div>
+            <div class="card-subtitle">Informações obtidas da base da Receita Federal.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <tbody>
+              <tr>
+                <td>CNPJ</td>
+                <td id="dados-cnpj">—</td>
+              </tr>
+              <tr>
+                <td>Razão social</td>
+                <td id="dados-razao">—</td>
+              </tr>
+              <tr>
+                <td>Nome fantasia</td>
+                <td id="dados-fantasia">—</td>
+              </tr>
+              <tr>
+                <td>Responsável</td>
+                <td id="dados-titular">—</td>
+              </tr>
+              <tr>
+                <td>Data de abertura</td>
+                <td id="dados-abertura">—</td>
+              </tr>
+              <tr>
+                <td>Atividade principal</td>
+                <td id="dados-cnae">—</td>
+              </tr>
+              <tr>
+                <td>Município / UF</td>
+                <td id="dados-municipio">—</td>
+              </tr>
+              <tr>
+                <td>Situação cadastral</td>
+                <td><span class="status-badge status-badge--warning">Pendente de regularização</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PROCEDIMENTO -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </div>
+          <div>
+            <div class="card-title">Procedimento de regularização</div>
+            <div class="card-subtitle">Acompanhe as etapas do processo.</div>
+          </div>
+        </div>
+        <div class="card-body" style="padding-top: 16px;">
+          <ul class="procedure-list">
+            <li class="procedure-item">
+              <div class="procedure-num procedure-num--done">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div>
+                <div class="procedure-label">Abertura realizada</div>
+                <div class="procedure-desc">Seu MEI foi aberto com sucesso.</div>
+              </div>
+            </li>
+            <li class="procedure-item">
+              <div class="procedure-num procedure-num--active">2</div>
+              <div>
+                <div class="procedure-label">Pagamento da taxa de integração</div>
+                <div class="procedure-desc">Necessário para validar o cadastro no sistema DAS.</div>
+              </div>
+            </li>
+            <li class="procedure-item">
+              <div class="procedure-num procedure-num--pending">3</div>
+              <div>
+                <div class="procedure-label">Liberação do sistema DAS</div>
+                <div class="procedure-desc">Acesso liberado em até 2 dias úteis após confirmação.</div>
+              </div>
+            </li>
+            <li class="procedure-item">
+              <div class="procedure-num procedure-num--pending">4</div>
+              <div>
+                <div class="procedure-label">MEI regularizado</div>
+                <div class="procedure-desc">Seu cadastro estará ativo e em dia.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VENCIMENTO + BOTÃO -->
+      <div class="due-banner">
+        <span class="due-label">Prazo para regularização</span>
+        <span class="due-date" id="data-vencimento">—</span>
+      </div>
+
+      <a href="pagamento.html" class="btn btn--success btn--full btn--lg" id="btnPagar">
+        Prosseguir para pagamento
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+
+      <p style="text-align:center; margin-top:12px; font-size:12px; color:var(--text-muted);">
+        Valor: <strong style="color:var(--text-heading);">R$ 79,90</strong> — pagamento único via PIX
+      </p>
+
+    </div><!-- /container -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container--wide footer-top">
+      <p>
+        Seus dados são tratados com segurança e privacidade.<br>
+        Serviço privado de assessoria do Governo Federal.
+       
+        <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor" target="_blank" rel="noopener">portais oficiais</a>.
+      </p>
+    </div>
+    <div class="container--wide footer-bottom">
+      <p>© 2026 RegularizaMEI</p>
+      <p>Feito para quem empreende.</p>
+      <p>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Privacidade em primeiro lugar
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

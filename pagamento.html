@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento PIX — Regularização MEI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container--wide header-inner">
+      <a href="index.html" class="logo">
+        <img src="https://i.ibb.co/CsYPdqkf/imagemsite.png" alt="RegularizaMEI" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-name">Regulariza<strong>MEI</strong></span>
+          <span class="logo-sub">Portal do Empreendedor</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <span class="header-badge">
+          <span class="dot"></span>
+          Ambiente seguro
+        </span>
+        <a href="#" class="header-help">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Precisa de ajuda?
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- INTRO -->
+      <div class="page-intro">
+        <span class="page-label">Regularização MEI · 2026</span>
+        <h1>Pagamento via PIX</h1>
+        <p>Escaneie o QR Code ou copie o código para efetuar o pagamento.</p>
+      </div>
+
+      <!-- STEPS -->
+      <div class="steps-indicator">
+        <div class="step-item done">
+          <div class="step-num">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="step-label">Consulta</span>
+        </div>
+        <div class="step-item done">
+          <div class="step-num">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="step-label">Dados</span>
+        </div>
+        <div class="step-item active">
+          <div class="step-num">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </div>
+          <span class="step-label">Pagamento</span>
+        </div>
+      </div>
+
+      <div class="steps-meta">
+        <span>Etapa 3 de 3</span>
+        <a href="dados.html">Voltar</a>
+      </div>
+
+      <!-- ESTADO: CARREGANDO -->
+      <div id="estado-carregando" class="card">
+        <div class="card-body">
+          <div class="loading-overlay" style="display:flex;">
+            <div class="spinner"></div>
+            <p class="loading-text">Gerando cobrança PIX...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESTADO: ERRO -->
+      <div id="estado-erro" style="display:none;">
+        <div class="alert alert--warning" style="margin-bottom:16px;">
+          <div class="alert-title">Não foi possível gerar o PIX</div>
+          <span id="erro-mensagem">Tente novamente em instantes.</span>
+        </div>
+        <button class="btn btn--primary btn--full" onclick="iniciarPagamento()">
+          Tentar novamente
+        </button>
+      </div>
+
+      <!-- ESTADO: PAGO -->
+      <div id="estado-pago" style="display:none;">
+        <div class="alert alert--success" style="margin-bottom:16px;">
+          <div class="alert-title">Pagamento confirmado!</div>
+          Seu pagamento foi recebido. Redirecionando para a confirmação...
+        </div>
+      </div>
+
+      <!-- ESTADO: PIX GERADO -->
+      <div id="estado-pix" style="display:none;">
+
+        <!-- VALOR -->
+        <div class="card">
+          <div class="valor-destaque">
+            <div class="valor-label">Taxa de regularização</div>
+            <div class="valor-num">R$ 79,90</div>
+          </div>
+          <!-- QR CODE (imagem base64 real da Profanus Pay) -->
+          <div class="qr-wrapper">
+            <div id="qr-container">
+              <img id="qr-imagem" src="" alt="QR Code PIX" width="220" height="220"
+                style="display:block; border:1px solid var(--border); border-radius:var(--radius); padding:12px; background:#fff;">
+            </div>
+            <p class="qr-hint">Escaneie com o aplicativo do seu banco</p>
+          </div>
+        </div>
+
+        <!-- INSTRUÇÕES -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <div><div class="card-title">Como pagar via PIX</div></div>
+          </div>
+          <div class="card-body" style="padding-top:16px;">
+            <ol class="pix-steps">
+              <li class="pix-step"><span class="pix-step-num">1</span>Abra o aplicativo do seu banco</li>
+              <li class="pix-step"><span class="pix-step-num">2</span>Selecione a opção PIX</li>
+              <li class="pix-step"><span class="pix-step-num">3</span>Escolha "PIX Copia e Cola"</li>
+              <li class="pix-step"><span class="pix-step-num">4</span>Cole o código abaixo e confirme o valor de <strong>R$ 79,90</strong></li>
+              <li class="pix-step"><span class="pix-step-num">5</span>Aguarde a confirmação — prazo de até 2 dias úteis</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- CÓDIGO PIX -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </div>
+            <div><div class="card-title">Código PIX Copia e Cola</div></div>
+          </div>
+          <div class="card-body">
+            <div class="pix-code-block" id="pixCode">—</div>
+            <button class="btn btn--primary btn--full" onclick="copiarCodigo()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copiar código
+            </button>
+            <div class="copy-feedback" id="copyFeedback">Código copiado com sucesso.</div>
+          </div>
+        </div>
+
+        <!-- AVISO -->
+        <div class="alert alert--warning">
+          <div class="alert-title">Informações importantes</div>
+          Guarde o comprovante de pagamento. Vencimento do PIX: <strong id="prazo-venc">—</strong>.
+          Em caso de dúvidas: contato@regularizamei.com.br
+        </div>
+
+        <!-- STATUS DE POLLING -->
+        <div id="polling-status" class="alert alert--info" style="display:none;">
+          <div class="alert-title">Aguardando confirmação</div>
+          Verificando o pagamento automaticamente a cada 10 segundos...
+        </div>
+
+      </div><!-- /estado-pix -->
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container--wide footer-top">
+      <p>
+        Seus dados são tratados com segurança e privacidade.<br>
+        Serviço privado de assessoria do Governo Federal.
+       
+        <a href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor" target="_blank" rel="noopener">portais oficiais</a>.
+      </p>
+    </div>
+    <div class="container--wide footer-bottom">
+      <p>© 2026 RegularizaMEI</p>
+      <p>Feito para quem empreende.</p>
+      <p>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Privacidade em primeiro lugar
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    var transacaoId   = null;
+    var pollingTimer  = null;
+    var tentativasPoll = 0;
+    var MAX_POLLS     = 72; // 72 × 10s = 12 minutos de polling
+
+    // ── Exibe apenas um estado ───────────────────
+    function mostrarEstado(nome) {
+      ['estado-carregando', 'estado-erro', 'estado-pix', 'estado-pago'].forEach(function (id) {
+        document.getElementById(id).style.display = id === nome ? '' : 'none';
+      });
+    }
+
+    // ── Iniciar / gerar PIX ──────────────────────
+    async function iniciarPagamento() {
+      mostrarEstado('estado-carregando');
+
+      var dados     = JSON.parse(localStorage.getItem('dadosCNPJ') || 'null');
+      var protocolo = localStorage.getItem('protocolo');
+
+      // Gera protocolo único se ainda não existir para esta sessão
+      if (!protocolo) {
+        protocolo = 'MEI' + Date.now() + Math.random().toString(36).substring(2,5).toUpperCase();
+        localStorage.setItem('protocolo', protocolo);
+      }
+
+      if (!dados || !dados.cnpj) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      try {
+        var resp = await fetch('/api/pix/criar', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ cnpj: dados.cnpj, protocolo: protocolo }),
+        });
+
+        var json = await resp.json();
+
+        if (!resp.ok) {
+          throw new Error(json.erro || 'Erro ao gerar o PIX.');
+        }
+
+        // Salva transacaoId para polling e para confirmação.html
+        transacaoId = json.transacaoId;
+        localStorage.setItem('transacaoId', transacaoId);
+        localStorage.setItem('pixExpiracao', json.expiracao);
+
+        renderizarPIX(json);
+        mostrarEstado('estado-pix');
+        iniciarPolling();
+
+      } catch (err) {
+        document.getElementById('erro-mensagem').textContent = err.message;
+        mostrarEstado('estado-erro');
+      }
+    }
+
+    // ── Renderiza QR Code e código PIX ──────────
+    function renderizarPIX(dados) {
+      // QR Code: imagem base64 real da Profanus Pay
+      var img = document.getElementById('qr-imagem');
+      if (dados.qrCodeBase64) {
+        // A Profanus retorna "data:image/png;base64,..." diretamente
+        img.src = dados.qrCodeBase64;
+      }
+
+      // Código Copia e Cola real
+      var elCodigo = document.getElementById('pixCode');
+      if (dados.pixCopiaECola) {
+        elCodigo.textContent = dados.pixCopiaECola;
+      }
+
+      // Data de vencimento
+      var elVenc = document.getElementById('prazo-venc');
+      if (dados.expiracao) {
+        elVenc.textContent = formatarData(new Date(dados.expiracao));
+      }
+    }
+
+    // ── Polling de status ────────────────────────
+    function iniciarPolling() {
+      if (!transacaoId) return;
+      document.getElementById('polling-status').style.display = '';
+      pollingTimer = setInterval(verificarStatus, 10000); // a cada 10s
+    }
+
+    async function verificarStatus() {
+      if (!transacaoId) return;
+
+      tentativasPoll++;
+      if (tentativasPoll > MAX_POLLS) {
+        clearInterval(pollingTimer);
+        document.getElementById('polling-status').style.display = 'none';
+        return;
+      }
+
+      try {
+        var resp = await fetch('/api/pix/status?id=' + encodeURIComponent(transacaoId));
+        if (!resp.ok) return; // falha silenciosa — tenta de novo no próximo ciclo
+
+        var json = await resp.json();
+
+        if (json.pago) {
+          clearInterval(pollingTimer);
+          mostrarEstado('estado-pago');
+          // Salva dados para confirmacao.html
+          localStorage.setItem('pagamentoConfirmado', JSON.stringify({
+            transacaoId: json.transacaoId,
+            pago_em:     json.pago_em,
+            pagadorNome: json.pagadorNome,
+          }));
+          setTimeout(function () {
+            window.location.href = 'confirmacao.html';
+          }, 2000);
+        }
+
+        if (json.status === 'expired' || json.status === 'cancelled') {
+          clearInterval(pollingTimer);
+          // PIX expirou — limpa protocolo para forçar nova cobrança
+          localStorage.removeItem('protocolo');
+          document.getElementById('erro-mensagem').textContent =
+            'O PIX expirou. Clique em "Tentar novamente" para gerar um novo código.';
+          mostrarEstado('estado-erro');
+        }
+
+      } catch (_) {
+        // falha de rede — ignora e tenta no próximo ciclo
+      }
+    }
+
+    // ── Inicializa ao carregar ───────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      // Data de vencimento no aviso (do localStorage, antes de gerar o PIX)
+      var venc = localStorage.getItem('dataVencimento');
+      if (venc) {
+        var el = document.getElementById('prazo-venc');
+        if (el) el.textContent = formatarData(new Date(venc));
+      }
+
+      iniciarPagamento();
+    });
+  </script>
+</body>
+</html>
