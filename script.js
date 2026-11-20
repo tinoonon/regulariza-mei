@@ -298,8 +298,6 @@ function iniciarDados() {
 
   set('dados-cnpj',      dados.cnpj);
   set('dados-razao',     dados.razaoSocial);
-  set('dados-fantasia',  dados.nomeFantasia);
-  set('dados-titular',   dados.nomeTitular);
   set('dados-abertura',  dados.dataAbertura);
   set('dados-cnae',      dados.cnae);
   set('dados-municipio', dados.municipio);

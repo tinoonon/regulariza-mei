@@ -34,8 +34,5 @@
       "src": "/",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "PROFANUS_API_KEY": "@profanus_api_key"
-  }
+  ]
 }
