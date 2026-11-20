@@ -4,7 +4,7 @@
 //   PROFANUS_API_KEY   → x-api-key da Profanus Pay
 
 const PROFANUS_URL = 'https://profanuspay.com/api/pix/create';
-const VALOR_TAXA   = 1.00;
+const VALOR_TAXA   = 0.50;
 const EXPIRACAO_S  = 172800; // 48 horas em segundos
 
 // ── Retry com backoff exponencial ────────────

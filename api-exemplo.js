@@ -377,7 +377,7 @@ fetch('http://localhost:3000/api/gerar-pix', {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
         cnpj: '11.222.333/0001-81',
-        valor: 1.00
+        valor: 0.50
     })
 })
 .then(res => res.json())
