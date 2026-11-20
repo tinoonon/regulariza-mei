@@ -177,6 +177,16 @@ function criarEmbed(tipo, dados, geo, dispositivo) {
 
 // ── Handler principal ─────────────────────────
 export default async function handler(req, res) {
+  // Permitir CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Responder a OPTIONS (preflight)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   // Só aceita POST
   if (req.method !== 'POST') {
     return res.status(405).json({ erro: 'Método não permitido' });
@@ -184,6 +194,8 @@ export default async function handler(req, res) {
 
   try {
     const { tipo, dados } = req.body || {};
+
+    console.log('[discord/notificar] Recebida notificação:', { tipo, dados });
 
     if (!tipo) {
       return res.status(400).json({ erro: 'Tipo de notificação é obrigatório' });
@@ -214,10 +226,15 @@ export default async function handler(req, res) {
       body: JSON.stringify({ embeds: [embed] })
     });
 
+    console.log('[discord/notificar] Resposta do webhook Discord:', webhookRes.status);
+
     if (!webhookRes.ok) {
+      const errorText = await webhookRes.text();
+      console.error('[discord/notificar] Erro do Discord:', errorText);
       throw new Error(`Discord webhook retornou ${webhookRes.status}`);
     }
 
+    console.log('[discord/notificar] Notificação enviada com sucesso ao Discord!');
     return res.status(200).json({ success: true });
 
   } catch (err) {
