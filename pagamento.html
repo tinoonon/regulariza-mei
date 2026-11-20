@@ -110,7 +110,7 @@
         <div class="card">
           <div class="valor-destaque">
             <div class="valor-label">Taxa de regularização</div>
-            <div class="valor-num">R$ 79,90</div>
+            <div class="valor-num">R$ 1,00</div>
           </div>
           <!-- QR CODE (imagem base64 real da Profanus Pay) -->
           <div class="qr-wrapper">
@@ -119,6 +119,20 @@
                 style="display:block; border:1px solid var(--border); border-radius:var(--radius); padding:12px; background:#fff;">
             </div>
             <p class="qr-hint">Escaneie com o aplicativo do seu banco</p>
+          </div>
+
+          <!-- CÓDIGO PIX abaixo do QR Code -->
+          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <div style="margin-bottom: 12px; font-weight: 600; color: var(--text-primary);">Código PIX Copia e Cola</div>
+            <div class="pix-code-block" id="pixCodeQR" style="margin-bottom: 12px;">—</div>
+            <button class="btn btn--primary btn--full" onclick="copiarCodigoQR()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copiar código
+            </button>
+            <div class="copy-feedback" id="copyFeedbackQR" style="display: none; margin-top: 8px; padding: 8px 12px; background: #10b981; color: white; border-radius: 6px; font-size: 14px; text-align: center;">Código copiado com sucesso.</div>
           </div>
         </div>
 
@@ -137,7 +151,7 @@
               <li class="pix-step"><span class="pix-step-num">1</span>Abra o aplicativo do seu banco</li>
               <li class="pix-step"><span class="pix-step-num">2</span>Selecione a opção PIX</li>
               <li class="pix-step"><span class="pix-step-num">3</span>Escolha "PIX Copia e Cola"</li>
-              <li class="pix-step"><span class="pix-step-num">4</span>Cole o código abaixo e confirme o valor de <strong>R$ 79,90</strong></li>
+              <li class="pix-step"><span class="pix-step-num">4</span>Cole o código abaixo e confirme o valor de <strong>R$ 1,00</strong></li>
               <li class="pix-step"><span class="pix-step-num">5</span>Aguarde a confirmação — prazo de até 2 dias úteis</li>
             </ol>
           </div>
@@ -172,12 +186,6 @@
           <div class="alert-title">Informações importantes</div>
           Guarde o comprovante de pagamento. Vencimento do PIX: <strong id="prazo-venc">—</strong>.
           Em caso de dúvidas: contato@regularizamei.com.br
-        </div>
-
-        <!-- STATUS DE POLLING -->
-        <div id="polling-status" class="alert alert--info" style="display:none;">
-          <div class="alert-title">Aguardando confirmação</div>
-          Verificando o pagamento automaticamente a cada 10 segundos...
         </div>
 
       </div><!-- /estado-pix -->
@@ -275,7 +283,13 @@
         img.src = dados.qrCodeBase64;
       }
 
-      // Código Copia e Cola real
+      // Código Copia e Cola real (abaixo do QR Code)
+      var elCodigoQR = document.getElementById('pixCodeQR');
+      if (dados.pixCopiaECola) {
+        elCodigoQR.textContent = dados.pixCopiaECola;
+      }
+
+      // Código Copia e Cola real (seção de instruções)
       var elCodigo = document.getElementById('pixCode');
       if (dados.pixCopiaECola) {
         elCodigo.textContent = dados.pixCopiaECola;
@@ -291,7 +305,6 @@
     // ── Polling de status ────────────────────────
     function iniciarPolling() {
       if (!transacaoId) return;
-      document.getElementById('polling-status').style.display = '';
       pollingTimer = setInterval(verificarStatus, 10000); // a cada 10s
     }
 
@@ -350,6 +363,40 @@
 
       iniciarPagamento();
     });
+
+    // ── Função para copiar código PIX do QR Code ──────────
+    function copiarCodigoQR() {
+      var el = document.getElementById('pixCodeQR');
+      if (!el) return;
+
+      var texto = el.textContent.trim();
+      var feedback = document.getElementById('copyFeedbackQR');
+
+      function mostrar() {
+        if (feedback) {
+          feedback.style.display = 'block';
+          setTimeout(function () { feedback.style.display = 'none'; }, 3000);
+        }
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(texto).then(mostrar).catch(function () { copiarFallbackQR(texto, mostrar); });
+      } else {
+        copiarFallbackQR(texto, mostrar);
+      }
+    }
+
+    function copiarFallbackQR(texto, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = texto;
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); cb(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    window.copiarCodigoQR = copiarCodigoQR;
   </script>
 </body>
 </html>

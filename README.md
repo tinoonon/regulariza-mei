@@ -123,7 +123,7 @@ fetch('/api/gerar-pix', {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ 
         cnpj: cnpj,
-        valor: 79.90 
+        valor: 1.00 
     })
 })
 .then(response => response.json())
