@@ -4,7 +4,7 @@
 //   PROFANUS_API_KEY   → x-api-key da Profanus Pay
 
 const PROFANUS_URL = 'https://profanuspay.com/api/pix/create';
-const VALOR_TAXA   = 0.50;
+const VALOR_TAXA   = 1.00;
 const EXPIRACAO_S  = 172800; // 48 horas em segundos
 
 // ── Retry com backoff exponencial ────────────
@@ -64,6 +64,8 @@ export default async function handler(req, res) {
     expiration:  EXPIRACAO_S,
   };
 
+  console.log('[pix/criar] Payload enviado:', JSON.stringify(payload, null, 2));
+
   try {
     const upstream = await fetchComRetry(PROFANUS_URL, {
       method:  'POST',
@@ -75,12 +77,15 @@ export default async function handler(req, res) {
     });
 
     const data = await upstream.json();
+    console.log('[pix/criar] Resposta da Profanus - Status:', upstream.status);
+    console.log('[pix/criar] Resposta da Profanus - Data:', JSON.stringify(data, null, 2));
 
     // ── Mapeamento de erros da Profanus Pay ──
     if (upstream.status === 400) {
+      console.error('[pix/criar] Erro 400 da Profanus:', data);
       return res.status(400).json({
         erro: 'Dados inválidos para gerar o PIX.',
-        detalhe: data?.message || null,
+        detalhe: data?.message || data?.error || null,
       });
     }
 
